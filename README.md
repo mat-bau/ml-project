@@ -79,7 +79,7 @@ pip install -r requirements.txt
 pip install ipykernel
 ```
 
-Et choisir le kernel Python 3.12 (.venv) dans la liste des kernel dispo
+Et choisir l'environnement .venv (3.12.0) Python 3.12.0 dans la liste des kernel dispo
 
 ### 5. Gestion des kernels 
 ```bash
