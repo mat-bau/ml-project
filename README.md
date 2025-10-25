@@ -3,26 +3,32 @@
 ## Organisation du projet 
 
 ml-project/
-├── README.md
-├── requirements.txt
-├── data/
-│   ├── labeled_data/
-│   └── unlabeled_data/
-├── notebooks/
-│   ├── 01_eda.ipynb       
-│   ├── 02_part1_linear.ipynb
-│   ├── 03_part2_nonlinear.ipynb
-│   └── 04_part3_images.ipynb
-├── src/
-│   ├── __init__.py
-│   ├── preprocessing.py
-│   ├── feature_engineering.py
-│   ├── train.py
-│   ├── evaluate.py
-│   └── utils.py
-├── results/
-└── report/
-                
+
+### Fichiers principaux
+README.md          # Overview et instructions
+requirements.txt   # Dépendances du projet
+
+### Données
+data/
+    labeled_data/  # Données étiquetées
+    unlabeled_data/# Données non étiquetées
+
+### Notebooks (pour la visualisation et tester petit à petit
+notebooks/
+    01_eda.ipynb
+    02_part1_linear.ipynb
+    03_part2_nonlinear.ipynb
+    04_part3_images.ipynb
+
+### Scripts source (quand on est sûrs de nos fonctions)
+src/
+    __init__.py
+    preprocessing.py
+    feature_engineering.py
+    models.py
+    train.py
+    evaluate.py
+    utils.py       
 
 test fonctions et parametres dans notebooks -> fonctions qui marchent => dans les fichiers python dans src/
 
