@@ -24,6 +24,65 @@ ml-project/
 └── report/                   
 
 test fonctions et parametres dans notebooks -> fonctions qui marchent => dans les fichiers python dans src/
+
+## Installation 
+
+### 1. Installer Python 3.12 via Homebrew
+
+```bash
+# Installer Homebrew si pas déjà fait
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Installer Python 3.12
+brew install python@3.12
+
+# Vérifier l'installation
+/opt/homebrew/bin/python3 --version
+```
+
+### Créer un environnement virtuel pour le projet 
+
+```bash
+# Aller dans le dossier du projet
+cd LELEC2870/ml-project
+
+# Créer un environnement virtuel avec Python 3.12
+/Library/Frameworks/Python.framework/Versions/3.12/bin/python3 -m venv .venv
+
+# Activer l'environnement virtuel
+source .venv/bin/activate
+
+# Vérifier le Python utilisé
+which python
+python --version
+```
+### 3. Installer les dépendances du projet
+
+```bash
+# Mettre à jour pip
+pip install --upgrade pip
+
+# Installer les packages requis
+pip install -r requirements.txt
+```
+
+### 4. Configurer Jupyter Notebook pour utiliser l'environnement virtuel
+```bash
+# Installer ipykernel dans l'environnement virtuel
+pip install ipykernel
+```
+
+Et choisir le kernel Python 3.12 (.venv) dans la liste des kernel dispo
+
+### 5. Gestion des kernels 
+```bash
+jupyter kernelspec list           # liste tous les kernels
+jupyter kernelspec remove <name>  # supprimer un kernel
+deactivate                        # sortir de l'environnement
+rm -rf .venv                       # supprimer l'environnement
+```
+
+
 ## Instructions
 
 The project consists of **four parts**:
