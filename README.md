@@ -3,25 +3,25 @@
 ## Organisation du projet 
 
 ml-project/
-├── README.md                 # Overview et instructions
-├── requirements.txt          # Dépendances du projet
+├── README.md
+├── requirements.txt
 ├── data/
-│   ├── labeled_data/         # Données étiquetées
-│   └── unlabeled_data/       # Données non étiquetées
+│   ├── labeled_data/
+│   └── unlabeled_data/
 ├── notebooks/
-│   ├── 01_eda.ipynb          # Exploratory Data Analysis
+│   ├── 01_eda.ipynb       
 │   ├── 02_part1_linear.ipynb
 │   ├── 03_part2_nonlinear.ipynb
 │   └── 04_part3_images.ipynb
 ├── src/
 │   ├── __init__.py
-│   ├── preprocessing.py      # Fonctions de prétraitement des données
-│   ├── feature_engineering.py # Sélection et extraction de features
-│   ├── train.py              # Scripts d'entraînement
-│   ├── evaluate.py           # Métriques d'évaluation
-│   └── utils.py              # Fonctions utilitaires
-├── results/                  # Prédictions et figures
-└── report/                    # Rapports et documents
+│   ├── preprocessing.py
+│   ├── feature_engineering.py
+│   ├── train.py
+│   ├── evaluate.py
+│   └── utils.py
+├── results/
+└── report/
                 
 
 test fonctions et parametres dans notebooks -> fonctions qui marchent => dans les fichiers python dans src/
