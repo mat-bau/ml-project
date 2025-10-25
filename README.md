@@ -2,6 +2,7 @@
 
 ## Organisation du projet 
 ml-project/
+
 ├── README.md                  # Overview et instructions
 ├── requirements.txt           # Dependencies
 ├── data/
