@@ -1,27 +1,34 @@
 # Machine Learning project
 
 ## Organisation du projet 
+
 ml-project/
-├── README.md                  # Overview et instructions
-├── requirements.txt           # Dependencies
-├── data/
-│   ├── labeled_data/
-│   └── unlabeled_data/
-├── notebooks/
-│   ├── 01_eda.ipynb          # Exploratory Data Analysis
-│   ├── 02_part1_linear.ipynb
-│   ├── 03_part2_nonlinear.ipynb
-│   └── 04_part3_images.ipynb
-├── src/
-│   ├── __init__.py
-│   ├── preprocessing.py       # Data preprocessing functions
-│   ├── feature_engineering.py # Feature selection/extraction
-│   ├── models.py              # Model classes
-│   ├── train.py               # Training scripts
-│   ├── evaluate.py            # Evaluation metrics
-│   └── utils.py               # Helper functions
-├── results/                   # Predictions and figures
-└── report/                   
+
+### Fichiers principaux
+README.md          # Overview et instructions
+requirements.txt   # Dépendances du projet
+
+### Données
+data/
+    labeled_data/  # Données étiquetées
+    unlabeled_data/# Données non étiquetées
+
+### Notebooks (pour la visualisation et tester petit à petit
+notebooks/
+    01_eda.ipynb
+    02_part1_linear.ipynb
+    03_part2_nonlinear.ipynb
+    04_part3_images.ipynb
+
+### Scripts source (quand on est sûrs de nos fonctions)
+src/
+    __init__.py
+    preprocessing.py
+    feature_engineering.py
+    models.py
+    train.py
+    evaluate.py
+    utils.py       
 
 test fonctions et parametres dans notebooks -> fonctions qui marchent => dans les fichiers python dans src/
 
@@ -72,7 +79,7 @@ pip install -r requirements.txt
 pip install ipykernel
 ```
 
-Et choisir le kernel Python 3.12 (.venv) dans la liste des kernel dispo
+Et choisir l'environnement .venv (3.12.0) Python 3.12.0 dans la liste des kernel dispo
 
 ### 5. Gestion des kernels 
 ```bash
