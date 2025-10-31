@@ -100,7 +100,7 @@ def one_hot_encoding(X:pd.DataFrame) -> pd.DataFrame:
 
 def scale_features(
     X: pd.DataFrame, 
-    scaler: StandardScaler = None, 
+    scaler: StandardScaler = StandardScaler(), 
     fit: bool = True
 ) -> tuple[pd.DataFrame, StandardScaler]:
     """
@@ -137,9 +137,19 @@ def scale_features(
     
     return X, scaler
 
+
+"""
+def remove_image(X:pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
+    if "img_filename" in X.columns:
+        img_filename_column = X["img_filename"]
+        X_encoded    = X.drop(columns = ["img_filename"])
+        return X_encoded, img_filename_column
+    return X, pd.Series(dtype=object)
+"""
+
 def preprocess_pipeline(
     X: pd.DataFrame, 
-    scaler: StandardScaler = None,
+    scaler: StandardScaler = StandardScaler(),
     fit_scaler: bool = True,
     add_features: bool = True
 ) -> tuple[pd.DataFrame, StandardScaler]:
@@ -172,8 +182,8 @@ def preprocess_pipeline(
         >>> X_test_prep, _ = preprocess_pipeline(X_test, scaler=scaler, fit_scaler=False)
     """
     X = X.copy()
-    if 'image_name' in X.columns:
-        X = X.drop('image_name', axis=1)
+    if 'img_filename' in X.columns:
+        X = X.drop('img_filename', axis=1)
     
     thresholds = {
         'blood pressure': 160,  # À ajuster par rapport à l'EDA
