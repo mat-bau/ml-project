@@ -199,3 +199,25 @@ def preprocess_pipeline(
     X, scaler = scale_features(X, scaler=scaler, fit=fit_scaler)
     
     return X, scaler
+
+# Preprocessing SANS scaling pour Random Forest
+def preprocess_pipeline_no_scaling(X, fit_scaler=True, add_features:bool = True):
+    """Version sans scaling pour les modèles basés sur arbres."""
+    X = X.copy()
+    
+    if 'img_filename' in X.columns:
+        X = X.drop('img_filename', axis=1)
+    
+    thresholds = {
+        'blood pressure': 160,  # À ajuster par rapport à l'EDA
+    }
+    X = cap_outliers(X, thresholds)
+    X = handle_missing_values(X, strategy='median')
+    
+    if add_features:
+        X = add_bmi(X)
+    
+    X = encode_ordinal_features(X)
+    X = one_hot_encoding(X)
+    
+    return X
