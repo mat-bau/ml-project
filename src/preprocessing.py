@@ -9,6 +9,7 @@ Course: LELEC2870
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
+from sklearn.impute import SimpleImputer
 
 def cap_outliers(X: pd.DataFrame, thresholds: dict) -> pd.DataFrame:
     """
@@ -87,7 +88,7 @@ def encode_ordinal_features(X: pd.DataFrame) -> pd.DataFrame:
         'Very high': 4
     }
     
-    ordinal_features = ['sarsaparilla', 'smurfberry liquor', 'smurfin donuts']
+    ordinal_features = ['sarsaparilla', 'smurfberry liquor', 'smurfin donuts', 'profession']
     
     for col in ordinal_features:
         if col in X.columns:
@@ -96,7 +97,7 @@ def encode_ordinal_features(X: pd.DataFrame) -> pd.DataFrame:
     return X
 
 def one_hot_encoding(X:pd.DataFrame) -> pd.DataFrame:
-    return pd.get_dummies(X, columns=['profession'], drop_first=True)
+    return pd.get_dummies(X, columns=['sarsaparilla', 'smurfberry liquor', 'smurfin donuts', 'profession'], drop_first=True)
 
 def scale_features(
     X: pd.DataFrame, 
@@ -147,58 +148,29 @@ def remove_image(X:pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     return X, pd.Series(dtype=object)
 """
 
-def preprocess_pipeline(
-    X: pd.DataFrame, 
-    scaler: StandardScaler = StandardScaler(),
-    fit_scaler: bool = True,
-    add_features: bool = True
-) -> tuple[pd.DataFrame, StandardScaler]:
+def preprocess_pipeline(X, scaler=None, fit_scaler=True):
     """
-    Pipeline complet de preprocessing pour les données Smurf.
-    
-    Étapes :
-    1. Suppression de la colonne 'image_name'
-    2. Plafonnement des outliers
-    3. Gestion des valeurs manquantes
-    4. Feature engineering (BMI)
-    5. Encodage ordinal (sarsaparilla, liquor, donuts)
-    6. One-hot encoding (profession)
-    7. Standardisation
-    
-    Args:
-        X (pd.DataFrame): DataFrame brut
-        scaler (StandardScaler): Scaler pré-fitté (None pour train)
-        fit_scaler (bool): Si True, fit le scaler. False pour test/unlabeled.
-        add_features (bool): Si True, ajoute BMI et autres features engineerées
-    
-    Returns:
-        tuple[pd.DataFrame, StandardScaler]: DataFrame prétraité + scaler
-    
-    Example:
-        >>> # Train
-        >>> X_train_prep, scaler = preprocess_pipeline(X_train, fit_scaler=True)
-        >>> 
-        >>> # Test (même preprocessing, même scaler)
-        >>> X_test_prep, _ = preprocess_pipeline(X_test, scaler=scaler, fit_scaler=False)
+    Nettoie et standardise les données d'entrée.
+    Garde le même scaler entre train, validation, test et unlabeled.
     """
-    X = X.copy()
-    if 'img_filename' in X.columns:
-        X = X.drop('img_filename', axis=1)
-    
-    thresholds = {
-        'blood pressure': 160,  # À ajuster par rapport à l'EDA
-    }
-    X = cap_outliers(X, thresholds)
-    X = handle_missing_values(X, strategy='median')
-    
-    if add_features:
-        X = add_bmi(X)
-    
-    X = encode_ordinal_features(X)
-    X = one_hot_encoding(X)
-    X, scaler = scale_features(X, scaler=scaler, fit=fit_scaler)
-    
-    return X, scaler
+    X_copy = X.copy()
+
+    # Remplacement des valeurs manquantes
+    X_copy = X_copy.fillna(X_copy.median(numeric_only=True))
+
+    # Supprimer les colonnes non numériques (s’il y en a encore)
+    X_copy = X_copy.select_dtypes(include=[np.number])
+
+    # Fit ou réutilise le scaler
+    if fit_scaler:
+        scaler = StandardScaler()
+        X_scaled = scaler.fit_transform(X_copy)
+    else:
+        X_scaled = scaler.transform(X_copy)
+
+    # Retourne sous forme DataFrame avec les mêmes noms de colonnes
+    return pd.DataFrame(X_scaled, columns=X_copy.columns, index=X_copy.index), scaler
+
 
 # Preprocessing SANS scaling pour Random Forest
 def preprocess_pipeline_no_scaling(X, fit_scaler=True, add_features:bool = True):
@@ -221,3 +193,40 @@ def preprocess_pipeline_no_scaling(X, fit_scaler=True, add_features:bool = True)
     X = one_hot_encoding(X)
     
     return X
+
+def preprocess_data(X, scaler=None, fit_scaler=True):
+    """Pipeline de preprocessing complet"""
+    X = X.copy()
+    
+    # Outliers
+    if 'blood pressure' in X.columns:
+        X.loc[X['blood pressure'] > 160, 'blood pressure'] = 160
+    
+    # Feature engineering: BMI
+    X['bmi'] = X['weight'] / (X['height'] / 100) ** 2
+    
+    # Encodage ordinal
+    ordinal_mapping = {'Very low': 0, 'Low': 1, 'Moderate': 2, 'High': 3, 'Very high': 4}
+    ordinal_cols = ['sarsaparilla', 'smurfberry liquor', 'smurfin donuts']
+    for col in ordinal_cols:
+        if col in X.columns:
+            X[col] = X[col].map(ordinal_mapping)
+    
+    # One-hot encoding
+    X = pd.get_dummies(X, columns=['profession'], drop_first=True)
+    
+    # Imputation
+    num_cols = X.select_dtypes(include=[np.number]).columns
+    imputer = SimpleImputer(strategy='median')
+    X[num_cols] = imputer.fit_transform(X[num_cols])
+    
+    # Scaling
+    if scaler is None:
+        scaler = StandardScaler()
+    
+    if fit_scaler:
+        X[num_cols] = scaler.fit_transform(X[num_cols])
+    else:
+        X[num_cols] = scaler.transform(X[num_cols])
+    
+    return X, scaler
