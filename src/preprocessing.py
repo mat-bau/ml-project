@@ -200,11 +200,17 @@ def preprocess_data(X, scaler=None, fit_scaler=True):
     
     # Outliers
     if 'blood pressure' in X.columns:
-        X.loc[X['blood pressure'] > 160, 'blood pressure'] = 160
+        X.loc[X['blood pressure'] > 140, 'blood pressure'] = 140
     
     # Feature engineering: BMI
     X['bmi'] = X['weight'] / (X['height'] / 100) ** 2
+    """
+    if 'height' in X.columns:
+        X = X.drop('height', axis=1)
     
+    if 'weight' in X.columns:
+        X = X.drop('weight', axis=1)
+    """
     # Encodage ordinal
     ordinal_mapping = {'Very low': 0, 'Low': 1, 'Moderate': 2, 'High': 3, 'Very high': 4}
     ordinal_cols = ['sarsaparilla', 'smurfberry liquor', 'smurfin donuts']
