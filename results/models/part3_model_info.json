@@ -6,20 +6,20 @@
             "type": "SimpleCNN",
             "n_features": 8,
             "n_epochs": 20,
-            "best_val_loss": 0.003951819259673357
+            "best_val_loss": 0.004081040266901255
         },
         "tabular_model": "RandomForest",
         "n_estimators": 200,
         "max_depth": 15
     },
     "performance": {
-        "cnn_alone_rmse": 0.056934728429320076,
-        "cnn_alone_r2": 0.5034542684153209,
-        "combined_rmse_train": 0.016744728321947056,
-        "combined_rmse_test": 0.03304048999414877,
-        "combined_r2_train": 0.9593713507166968,
-        "combined_r2_test": 0.7813406043164188,
-        "improvement_vs_cnn_alone": "41.97%"
+        "cnn_alone_rmse": 0.06465350272891508,
+        "cnn_alone_r2": 0.3596920954055304,
+        "combined_rmse_train": 0.017462913620812332,
+        "combined_rmse_test": 0.03380473647038705,
+        "combined_r2_train": 0.9558114669210258,
+        "combined_r2_test": 0.7711081685096894,
+        "improvement_vs_cnn_alone": "47.71%"
     },
     "features": {
         "tabular_features": 9,
@@ -28,10 +28,10 @@
     },
     "predictions": {
         "n_samples": 500,
-        "min": 0.007963300638722016,
-        "max": 0.3763144119769119,
-        "mean": 0.08442766590556536,
-        "std": 0.06327969324713659
+        "min": 0.008561499856354609,
+        "max": 0.4018268813131312,
+        "mean": 0.08559958263383792,
+        "std": 0.0691010154064949
     },
-    "timestamp": "2025-12-05 22:59:05"
+    "timestamp": "2025-12-05 23:01:06"
 }
