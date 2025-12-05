@@ -6,8 +6,8 @@
         "poly__degree": 2,
         "regressor__regressor__alpha": 200.0
     },
-    "rmse_cv": 0.041069643367763954,
+    "rmse_cv": 0.04106964336776393,
     "rmse_test": 0.042314244625975966,
-    "rmse_baseline": 0.05581492537678063,
+    "rmse_baseline": 0.05581492537678061,
     "features_count": 11
 }
