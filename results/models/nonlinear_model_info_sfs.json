@@ -33,14 +33,14 @@
             "Model": "MLP (Neural Net)",
             "Use_Log": true,
             "RMSE_CV": 0.04040702945587821,
-            "RMSE_Test": 0.04402929542443864,
+            "RMSE_Test": 0.04402929542443865,
             "Best_Params": "{'model__alpha': 0.1, 'model__hidden_layer_sizes':..."
         },
         {
             "Model": "SVR",
             "Use_Log": true,
-            "RMSE_CV": 0.0403410991667625,
-            "RMSE_Test": 0.04488066041293775,
+            "RMSE_CV": 0.040341099166762484,
+            "RMSE_Test": 0.04488066041293779,
             "Best_Params": "{'model__C': 0.1, 'model__epsilon': 0.01, 'model__..."
         },
         {
@@ -51,5 +51,5 @@
             "Best_Params": "{'model__n_neighbors': 10, 'model__p': 2, 'model__..."
         }
     ],
-    "timestamp": "2025-12-05 18:49:58"
+    "timestamp": "2025-12-05 22:06:36"
 }
