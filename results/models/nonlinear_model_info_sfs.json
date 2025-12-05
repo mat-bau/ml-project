@@ -1,0 +1,55 @@
+{
+    "model_name": "Gradient Boosting",
+    "model_type": "non-linear",
+    "use_log_transform": false,
+    "best_params": {
+        "model__learning_rate": 0.1,
+        "model__max_depth": 3,
+        "model__min_samples_split": 10,
+        "model__n_estimators": 200,
+        "model__subsample": 0.9
+    },
+    "rmse_test": 0.041815326586261116,
+    "comparison_with_linear": {
+        "linear_rmse": 0.042314244625975966,
+        "improvement_pct": 0.0004989180397148504
+    },
+    "all_results": [
+        {
+            "Model": "Random Forest",
+            "Use_Log": false,
+            "RMSE_CV": 0.04632305916201348,
+            "RMSE_Test": 0.04741184540799819,
+            "Best_Params": "{'model__max_depth': 15, 'model__max_features': 's..."
+        },
+        {
+            "Model": "Gradient Boosting",
+            "Use_Log": false,
+            "RMSE_CV": 0.04242087037289581,
+            "RMSE_Test": 0.041815326586261116,
+            "Best_Params": "{'model__learning_rate': 0.1, 'model__max_depth': ..."
+        },
+        {
+            "Model": "MLP (Neural Net)",
+            "Use_Log": true,
+            "RMSE_CV": 0.04040702945587821,
+            "RMSE_Test": 0.044029295424438654,
+            "Best_Params": "{'model__alpha': 0.1, 'model__hidden_layer_sizes':..."
+        },
+        {
+            "Model": "SVR",
+            "Use_Log": true,
+            "RMSE_CV": 0.04034109916676249,
+            "RMSE_Test": 0.04488066041293774,
+            "Best_Params": "{'model__C': 0.1, 'model__epsilon': 0.01, 'model__..."
+        },
+        {
+            "Model": "KNN",
+            "Use_Log": false,
+            "RMSE_CV": 0.05566364458097772,
+            "RMSE_Test": 0.05574730803747099,
+            "Best_Params": "{'model__n_neighbors': 10, 'model__p': 2, 'model__..."
+        }
+    ],
+    "timestamp": "2025-12-05 15:52:16"
+}
